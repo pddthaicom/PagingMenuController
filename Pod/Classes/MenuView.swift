@@ -195,6 +195,8 @@ open class MenuView: UIScrollView {
     }
     
     fileprivate func layoutContentView() {
+        guard let _ = contentView.superview else { return }
+
         // H:|[contentView]|
         // V:|[contentView(==scrollView)]|
         NSLayoutConstraint.activate([
@@ -244,6 +246,7 @@ open class MenuView: UIScrollView {
         NSLayoutConstraint.deactivate(contentView.constraints)
         
         for (index, menuItemView) in sortedMenuItemViews.enumerated() {
+            guard let _ = menuItemView.superview else { continue }
             if index == 0 {
                 // H:|[menuItemView]
                 menuItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

@@ -187,6 +187,10 @@ open class MenuItemView: UIView {
     }
     
     fileprivate func layoutMultiLineLabel() {
+        
+        guard let _ = titleLabel.superview else { return }
+        guard let _ = descriptionLabel.superview else { return }
+
         // H:|[titleLabel(==labelSize.width)]|
         // H:|[descriptionLabel(==labelSize.width)]|
         // V:|-margin-[titleLabel][descriptionLabel]-margin|
@@ -210,6 +214,8 @@ open class MenuItemView: UIView {
     }
 
     fileprivate func layoutLabel() {
+        guard let _ = titleLabel.superview else { return }
+        
         // H:|[titleLabel](==labelSize.width)|
         // V:|[titleLabel]|
         let titleLabelSize = calculateLabelSize(titleLabel, maxWidth: maxWindowSize)
@@ -224,6 +230,7 @@ open class MenuItemView: UIView {
     }
     
     fileprivate func layoutImageView() {
+        guard let _ = menuImageView.superview else { return }
         guard let image = menuImageView.image else { return }
         
         let width: CGFloat
@@ -265,7 +272,8 @@ open class MenuItemView: UIView {
     
     fileprivate func layoutDivider() {
         guard let dividerImageView = dividerImageView else { return }
-        
+        guard let _ = dividerImageView.superview else { return }
+
         NSLayoutConstraint.activate([
             dividerImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 1.0),
             dividerImageView.trailingAnchor.constraint(equalTo: trailingAnchor)

@@ -211,7 +211,8 @@ open class PagingMenuController: UIViewController {
     
     fileprivate func layoutMenuView() {
         guard let menuView = menuView else { return }
-        
+        guard let _ = menuView.superview else { return }
+
         let height: CGFloat
         switch options.componentType {
         case .all(let menuOptions, _):
@@ -256,7 +257,8 @@ open class PagingMenuController: UIViewController {
 
     fileprivate func layoutPagingViewController() {
         guard let pagingViewController = pagingViewController else { return }
-        
+        guard let _ = pagingViewController.view.superview else { return }
+
         // H:|[pagingView]|
         NSLayoutConstraint.activate([
             pagingViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -272,7 +274,8 @@ open class PagingMenuController: UIViewController {
                 ])
         case .all(let menuOptions, _):
             guard let menuView = menuView else { return }
-            
+            guard let _ = menuView.superview else { return }
+
             switch menuOptions.menuPosition {
             case .top:
                 // V:[menuView][pagingView]|

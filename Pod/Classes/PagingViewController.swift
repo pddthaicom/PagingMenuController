@@ -81,6 +81,8 @@ open class PagingViewController: UIViewController {
     }
     
     fileprivate func layoutContentScrollView() {
+        guard let _ = contentScrollView.superview else { return }
+
         NSLayoutConstraint.activate([
             contentScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -135,7 +137,8 @@ open class PagingViewController: UIViewController {
             }
             
             guard let pagingView = controller.view else { continue }
-            
+            guard let _ = pagingView.superview else { continue }
+
             // only one view controller
             if options.lazyLoadingPage == LazyLoadingPage.one ||
                 controllers.count == MinimumSupportedViewCount ||
@@ -151,7 +154,8 @@ open class PagingViewController: UIViewController {
                     if index == currentPage {
                         guard let previousPagingView = controllers[previousPage].view,
                             let nextPagingView = controllers[nextPage].view else { continue }
-                        
+                        guard let _ = previousPagingView.superview else { continue }
+
                         // H:[previousPagingView][pagingView][nextPagingView]
                         NSLayoutConstraint.activate([
                             previousPagingView.trailingAnchor.constraint(equalTo: pagingView.leadingAnchor, constant: 0),
